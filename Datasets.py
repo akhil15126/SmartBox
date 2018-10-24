@@ -82,21 +82,15 @@ class Datasets:
 
 		for fol in folders:
 			label=count
-			# print(label)
 			files=os.listdir(location+fol)
-			# proper_files=[a for a in files if a[-3:]=="pgm" and "Ambient" not in a]
 			proper_files=np.array(files)
-			# print(proper_files)
 			np.random.shuffle(proper_files)
-			# print(proper_files[0])
 			data=[]
 			for f in proper_files:
 				try:
-					# print(location+fol+"/"+f)
 					img=cv2.imread(location+fol+"/"+f)
 					if(len(img.shape)!=3):
 						continue
-					# print("YES")
 				except:
 					# print("YES")
 					continue
@@ -181,10 +175,6 @@ class Datasets:
 			temp_pkl = open(save,'wb')
 			pickle.dump(self,temp_pkl)
 			temp_pkl.close()
-		# print()
-		# print(labels_test)
-#		for a,b,c in zip(labels_test, targets, genuine_imposter):
-#			print(np.argmax(a), np.argmax(b), c)
 		return (self.images_train,self.labels_train,self.images_valid,self.labels_valid,self.images_test,self.labels_test,self.targets,self.genuine_imposter)
 
 

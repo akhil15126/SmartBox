@@ -1,13 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import cv2
-# from cnn import GeneralModel
 from Attacks.Attack import Attack
-# folder="/Users/akhilgoel/Desktop/smlassignment/mnist/"
-
-# from tensorflow.examples.tutorials.mnist import input_data
-
-# mnist=input_data.read_data_sets(folder, one_hot=True)
 ### LABEL LEAKING IMPLEMENT PREVENTION
 
 
