@@ -21,6 +21,7 @@ sklearn
 Apart from these libraries, the toolbox requires a CNN model with the following class attributes:
 
 1. **num_labels :** Number of labels in the dataset.
+2. **get_logits(x) :** Returns the output of the logits layer corresponding to the symbolic input x.
 
 
 ## Documentation
@@ -51,7 +52,7 @@ Apart from the methods particular to a certain attack, following methods are com
 
 1. **setup(x,y) :** Creates a graph for attacking images using the input and output placeholders x and y.
 2. **attack(X_test, Y_test) :** Runs the attack algorithm on the supplied set of images X_test.
-3. **analyse(X_test, Y_test, save) :** Creates and returns a dictionary of Rank 1 identification accuracies of the computed adversaries and X_test corresponding to the true labels Y_test. If the save attribute is not None then, original and adversary images are saved for comparison in the provided directory. 
+3. **analyse(X_test, Y_test, save) :** Creates and returns a dictionary of classification accuracies of the computed adversaries and X_test corresponding to the true labels Y_test. If the save attribute is not None then, original and adversary images are saved for comparison in the provided directory. 
 4. **print_analysis_results(X_test, Y_test, save) :** Prints the analysis dictionary created by analyse function.
 5. **get_perturbation() :** Returns the perturbations added to original images to convert them into adversaries.
 
@@ -116,7 +117,7 @@ Apart from the methods particular to a certain algorithm, following methods are 
 
 1. **mitigate(X) :** Runs the mitigation algorithm on the supplied set of images X.
 2. **return_mitigated() :** Returns the images after running the mitigation algorithm.
-3. **analyse(X_test,Y_test,save) :** Creates and returns a dictionary of Rank 1 identification acuracy before and after mitigation. If the save attribute is not None then, images before and after mitigation are saved for comparison in the supplied directory. 
+3. **analyse(X_test,Y_test,save) :** Creates and returns a dictionary of classification acuracy before and after mitigation. If the save attribute is not None then, images before and after mitigation are saved for comparison in the supplied directory. 
 4. **print_analysis_results(X_test,Y_test,save) :** Prints the analysis dictionary created by analyse function.
 
 
@@ -130,10 +131,12 @@ mit = a.mitigate(X_test)
 a.print_analysis_results(X_test, Y_test, save="./")
 ```
 
+## Usage
 
+The toolbox can be operated from the command line by supplying appropriate arguments. 
 
-Apart from the three major modules the toolbox also provides utilities to :
+Example : 
 
-1. Add and experiment on any custom database.
-2. Pre-train and store models for algorithms which require extensive training.
-
+```
+python smartbox.py --new_dataset --dataset_location <DATASET LOCATION> --save_dataset_info <FILE LOCATION> --load_model <FILE LOCATION> --attack L2 --detect_algo ArtifactLearning --mitigate_algo GaussianBlur --identification --verification
+```
